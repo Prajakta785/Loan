@@ -1,0 +1,588 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Custom scrollbars and sleek utility animations */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Scoped Sleek Scrollbars for Admin Independent Panels */
+.admin-theme-cyber ::-webkit-scrollbar,
+.admin-theme-dark ::-webkit-scrollbar,
+.admin-theme-navy ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.admin-theme-cyber ::-webkit-scrollbar-track,
+.admin-theme-dark ::-webkit-scrollbar-track,
+.admin-theme-navy ::-webkit-scrollbar-track {
+  background: rgba(10, 18, 36, 0.5);
+}
+.admin-theme-cyber ::-webkit-scrollbar-thumb,
+.admin-theme-dark ::-webkit-scrollbar-thumb,
+.admin-theme-navy ::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.35);
+  border-radius: 9999px;
+}
+.admin-theme-cyber ::-webkit-scrollbar-thumb:hover,
+.admin-theme-dark ::-webkit-scrollbar-thumb:hover,
+.admin-theme-navy ::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.65);
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s infinite ease-in-out;
+}
+
+/* 3D Box & Hover Depth */
+.box-3d {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  will-change: transform, box-shadow;
+}
+
+.box-3d:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5), 0 0 25px rgba(16, 185, 129, 0.15);
+}
+
+/* ======================================================== */
+/* ADMIN DASHBOARD THEMES: CYBER, DARK, NAVY & LIGHT        */
+/* ======================================================== */
+
+/* --- CYBER GLOW THEME (BRIGHTER FINTECH PRO & NEON AMBIENCE) --- */
+.admin-theme-cyber {
+  background-color: transparent !important;
+  color: #f8fafc !important;
+}
+
+.admin-theme-cyber aside {
+  background-color: rgba(18, 32, 60, 0.78) !important;
+  backdrop-filter: blur(24px) !important;
+  border-color: rgba(56, 189, 248, 0.3) !important;
+}
+
+.admin-theme-cyber header {
+  background-color: rgba(18, 32, 60, 0.72) !important;
+  backdrop-filter: blur(20px) !important;
+  border-color: rgba(56, 189, 248, 0.3) !important;
+}
+
+.admin-theme-cyber .bg-slate-900,
+.admin-theme-cyber .bg-slate-900\/85,
+.admin-theme-cyber .bg-slate-900\/90,
+.admin-theme-cyber .bg-slate-900\/95,
+.admin-theme-cyber .bg-slate-900\/80 {
+  background-color: rgba(26, 44, 78, 0.68) !important;
+  backdrop-filter: blur(20px) !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(34, 211, 238, 0.1) !important;
+}
+
+.admin-theme-cyber .bg-slate-950,
+.admin-theme-cyber .bg-slate-950\/80,
+.admin-theme-cyber .bg-slate-950\/60 {
+  background-color: rgba(16, 28, 52, 0.62) !important;
+  border-color: rgba(56, 189, 248, 0.25) !important;
+}
+
+.admin-theme-cyber .bg-slate-800,
+.admin-theme-cyber .bg-slate-800\/80,
+.admin-theme-cyber .bg-slate-800\/90 {
+  background-color: rgba(36, 58, 100, 0.65) !important;
+  border-color: rgba(56, 189, 248, 0.32) !important;
+}
+
+.admin-theme-cyber .border-slate-800,
+.admin-theme-cyber .border-slate-800\/80,
+.admin-theme-cyber .border-slate-700 {
+  border-color: rgba(56, 189, 248, 0.28) !important;
+}
+
+.admin-theme-cyber .text-white {
+  color: #ffffff !important;
+}
+
+.admin-theme-cyber .text-slate-400 {
+  color: #cbd5e1 !important;
+}
+
+.admin-theme-cyber .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+.admin-theme-cyber .text-slate-300 {
+  color: #f1f5f9 !important;
+}
+
+.admin-theme-cyber input,
+.admin-theme-cyber select,
+.admin-theme-cyber textarea {
+  background-color: rgba(20, 36, 68, 0.85) !important;
+  border-color: rgba(56, 189, 248, 0.4) !important;
+  color: #ffffff !important;
+}
+
+.admin-theme-cyber input:focus,
+.admin-theme-cyber select:focus,
+.admin-theme-cyber textarea:focus {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35) !important;
+}
+
+/* --- LIGHT THEME (ENTERPRISE BANKING SUITE) --- */
+.admin-theme-light {
+  background-color: #f8fafc !important;
+  background-image: none !important;
+  color: #0f172a !important;
+}
+
+.admin-theme-light .bg-slate-950,
+.admin-theme-light .bg-slate-950\/90,
+.admin-theme-light .bg-slate-950\/80,
+.admin-theme-light .bg-slate-950\/60 {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+.admin-theme-light .bg-slate-900,
+.admin-theme-light .bg-slate-900\/95,
+.admin-theme-light .bg-slate-900\/90,
+.admin-theme-light .bg-slate-900\/85,
+.admin-theme-light .bg-slate-900\/80 {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Light mode for gradient cards in overview */
+.admin-theme-light .from-slate-900\/90,
+.admin-theme-light .via-slate-900\/80,
+.admin-theme-light .to-slate-950\/90 {
+  --tw-gradient-from: #ffffff !important;
+  --tw-gradient-via: #ffffff !important;
+  --tw-gradient-to: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Exact Hero Card Colors & Glowing Borders as in original design */
+.admin-theme-light .admin-card-emerald {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border: 1.5px solid #34d399 !important;
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.15), 0 4px 6px -2px rgba(16, 185, 129, 0.05) !important;
+}
+.admin-theme-light .admin-card-emerald:hover {
+  border-color: #10b981 !important;
+  box-shadow: 0 14px 30px -4px rgba(16, 185, 129, 0.25) !important;
+}
+
+.admin-theme-light .admin-card-amber {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border: 1.5px solid #fbbf24 !important;
+  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.15), 0 4px 6px -2px rgba(245, 158, 11, 0.05) !important;
+}
+.admin-theme-light .admin-card-amber:hover {
+  border-color: #f59e0b !important;
+  box-shadow: 0 14px 30px -4px rgba(245, 158, 11, 0.25) !important;
+}
+
+.admin-theme-light .admin-card-cyan {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border: 1.5px solid #38bdf8 !important;
+  box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.15), 0 4px 6px -2px rgba(6, 182, 212, 0.05) !important;
+}
+.admin-theme-light .admin-card-cyan:hover {
+  border-color: #0284c7 !important;
+  box-shadow: 0 14px 30px -4px rgba(6, 182, 212, 0.25) !important;
+}
+
+.admin-theme-light .admin-card-purple {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border: 1.5px solid #c084fc !important;
+  box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.15), 0 4px 6px -2px rgba(168, 85, 247, 0.05) !important;
+}
+.admin-theme-light .admin-card-purple:hover {
+  border-color: #9333ea !important;
+  box-shadow: 0 14px 30px -4px rgba(168, 85, 247, 0.25) !important;
+}
+
+/* Matching Rounded Icon Badges */
+.admin-theme-light .admin-icon-emerald {
+  background-color: #ecfdf5 !important;
+  color: #059669 !important;
+  border: 1px solid #a7f3d0 !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15) !important;
+}
+.admin-theme-light .admin-icon-amber {
+  background-color: #fffbeb !important;
+  color: #d97706 !important;
+  border: 1px solid #fde68a !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15) !important;
+}
+.admin-theme-light .admin-icon-cyan {
+  background-color: #ecfeff !important;
+  color: #0891b2 !important;
+  border: 1px solid #a5f3fc !important;
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.15) !important;
+}
+.admin-theme-light .admin-icon-purple {
+  background-color: #faf5ff !important;
+  color: #9333ea !important;
+  border: 1px solid #e9d5ff !important;
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.15) !important;
+}
+
+/* Card titles and text colors in light mode */
+.admin-theme-light .admin-card-emerald .text-slate-300,
+.admin-theme-light .admin-card-amber .text-slate-300,
+.admin-theme-light .admin-card-cyan .text-slate-300,
+.admin-theme-light .admin-card-purple .text-slate-300 {
+  color: #475569 !important;
+}
+
+.admin-theme-light .admin-card-cyan .text-cyan-300 {
+  color: #0284c7 !important;
+}
+.admin-theme-light .admin-card-purple .text-purple-200 {
+  color: #9333ea !important;
+}
+.admin-theme-light .admin-card-purple .text-purple-300 {
+  color: #7c3aed !important;
+}
+
+.admin-theme-light .blur-\[110px\],
+.admin-theme-light .blur-\[100px\],
+.admin-theme-light .blur-\[120px\],
+.admin-theme-light .blur-\[140px\] {
+  display: none !important;
+}
+
+.admin-theme-light main {
+  background-color: #f8fafc !important;
+}
+
+.admin-theme-light .bg-slate-800,
+.admin-theme-light .bg-slate-800\/90,
+.admin-theme-light .bg-slate-800\/80 {
+  background-color: #f1f5f9 !important;
+  color: #334155 !important;
+  border-color: #cbd5e1 !important;
+}
+
+.admin-theme-light .bg-slate-800\/40 {
+  background-color: #f8fafc !important;
+}
+
+.admin-theme-light .hover\:bg-slate-800:hover,
+.admin-theme-light .hover\:bg-slate-700:hover,
+.admin-theme-light .hover\:bg-slate-800\/40:hover {
+  background-color: #e2e8f0 !important;
+}
+
+.admin-theme-light .border-slate-800,
+.admin-theme-light .border-slate-800\/90,
+.admin-theme-light .border-slate-800\/80,
+.admin-theme-light .border-slate-700,
+.admin-theme-light .border-slate-700\/80 {
+  border-color: #e2e8f0 !important;
+}
+
+.admin-theme-light .divide-slate-800 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #f1f5f9 !important;
+}
+
+.admin-theme-light .text-white {
+  color: #0f172a !important;
+}
+
+.admin-theme-light .text-slate-100,
+.admin-theme-light .text-slate-200 {
+  color: #1e293b !important;
+}
+
+.admin-theme-light .text-slate-300 {
+  color: #334155 !important;
+}
+
+.admin-theme-light .text-slate-400 {
+  color: #64748b !important;
+}
+
+/* Light mode inputs & textareas */
+.admin-theme-light input,
+.admin-theme-light select,
+.admin-theme-light textarea {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+.admin-theme-light input:focus,
+.admin-theme-light select:focus,
+.admin-theme-light textarea:focus {
+  border-color: #4f46e5 !important;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2) !important;
+}
+
+.admin-theme-light input::placeholder,
+.admin-theme-light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Light mode table headers */
+.admin-theme-light table thead tr {
+  background-color: #f1f5f9 !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.admin-theme-light table thead th {
+  color: #475569 !important;
+}
+
+.admin-theme-light svg line {
+  stroke: #cbd5e1 !important;
+}
+
+.admin-theme-light .text-emerald-400 {
+  color: #059669 !important;
+}
+
+.admin-theme-light .bg-emerald-500\/20 {
+  background-color: #d1fae5 !important;
+}
+
+.admin-theme-light .text-amber-400 {
+  color: #d97706 !important;
+}
+
+.admin-theme-light .bg-amber-400\/20,
+.admin-theme-light .bg-amber-500\/20 {
+  background-color: #fef3c7 !important;
+}
+
+.admin-theme-light .text-teal-400 {
+  color: #0d9488 !important;
+}
+
+.admin-theme-light .bg-teal-500\/20 {
+  background-color: #ccfbf1 !important;
+}
+
+.admin-theme-light .text-red-400 {
+  color: #dc2626 !important;
+}
+
+.admin-theme-light .bg-red-500\/20 {
+  background-color: #fee2e2 !important;
+}
+
+/* --- ROYAL NAVY THEME (EXECUTIVE SAPPHIRE) --- */
+.admin-theme-navy {
+  background-color: #0f1c3d !important;
+  color: #f1f5f9 !important;
+}
+
+.admin-theme-navy .bg-slate-950 {
+  background-color: #0c1733 !important;
+}
+
+.admin-theme-navy .bg-slate-900,
+.admin-theme-navy .bg-slate-900\/85,
+.admin-theme-navy .bg-slate-900\/90,
+.admin-theme-navy .bg-slate-900\/95 {
+  background-color: rgba(28, 46, 92, 0.75) !important;
+  border-color: #3b5998 !important;
+}
+
+.admin-theme-navy .bg-slate-800,
+.admin-theme-navy .bg-slate-800\/80 {
+  background-color: rgba(36, 60, 118, 0.70) !important;
+  border-color: #4364ab !important;
+}
+
+.admin-theme-navy .border-slate-800,
+.admin-theme-navy .border-slate-700 {
+  border-color: #2e4a82 !important;
+}
+
+.admin-theme-navy input,
+.admin-theme-navy select,
+.admin-theme-navy textarea {
+  background-color: #14244d !important;
+  border-color: #3b5998 !important;
+  color: #ffffff !important;
+}
+
+/* Sidebar & Header Layout rules */
+.admin-theme-light aside {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+.admin-theme-light aside .border-b,
+.admin-theme-light aside .border-t {
+  border-color: #e2e8f0 !important;
+}
+
+.admin-theme-light aside button:not(.bg-indigo-600):not(.btn-3d-emerald) {
+  color: #475569 !important;
+}
+
+.admin-theme-light aside button:not(.bg-indigo-600):not(.btn-3d-emerald):hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Executive Fintech Header that matches Admin Sidebar & Theme */
+header.admin-top-header,
+.admin-theme-light header,
+.admin-theme-cyber header,
+.admin-theme-dark header,
+.admin-theme-navy header {
+  background: linear-gradient(90deg, #090d16 0%, #0f172a 40%, #111e38 100%) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.22) !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.45) !important;
+  color: #ffffff !important;
+}
+
+.admin-theme-navy aside {
+  background-color: rgba(18, 30, 62, 0.85) !important;
+  border-color: #2b427b !important;
+  color: #f8fafc !important;
+}
+
+.admin-theme-navy aside .border-b,
+.admin-theme-navy aside .border-t {
+  border-color: #2b427b !important;
+}
+
+/* ======================================================== */
+/* ADMIN BACKGROUND IMAGE INTEGRATION                       */
+/* ======================================================== */
+.admin-theme-dark,
+.admin-theme-navy {
+  background-image: linear-gradient(180deg, rgba(16, 28, 54, 0.65) 0%, rgba(20, 36, 68, 0.68) 50%, rgba(14, 24, 48, 0.72) 100%), url('/admin-bg.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+.admin-theme-light {
+  background-color: #f8fafc !important;
+  background-image: none !important;
+}
+
+.admin-theme-light .bg-slate-900,
+.admin-theme-light .bg-slate-900\/90,
+.admin-theme-light .bg-slate-900\/95,
+.admin-theme-light .bg-slate-900\/85,
+.admin-theme-light .bg-slate-900\/80 {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* ======================================================== */
+/* 4 HERO CARDS ORIGINAL VIBRANT COLORS & BORDERS          */
+/* (Preserving exact colors from user screenshot)          */
+/* ======================================================== */
+.admin-theme-light .admin-card-emerald {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border: 1.5px solid #34d399 !important;
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.15), 0 4px 6px -2px rgba(16, 185, 129, 0.05) !important;
+}
+.admin-theme-light .admin-card-emerald:hover {
+  border-color: #10b981 !important;
+  box-shadow: 0 14px 30px -4px rgba(16, 185, 129, 0.25) !important;
+}
+
+.admin-theme-light .admin-card-amber {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border: 1.5px solid #fbbf24 !important;
+  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.15), 0 4px 6px -2px rgba(245, 158, 11, 0.05) !important;
+}
+.admin-theme-light .admin-card-amber:hover {
+  border-color: #f59e0b !important;
+  box-shadow: 0 14px 30px -4px rgba(245, 158, 11, 0.25) !important;
+}
+
+.admin-theme-light .admin-card-cyan {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border: 1.5px solid #38bdf8 !important;
+  box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.15), 0 4px 6px -2px rgba(6, 182, 212, 0.05) !important;
+}
+.admin-theme-light .admin-card-cyan:hover {
+  border-color: #0284c7 !important;
+  box-shadow: 0 14px 30px -4px rgba(6, 182, 212, 0.25) !important;
+}
+
+.admin-theme-light .admin-card-purple {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border: 1.5px solid #c084fc !important;
+  box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.15), 0 4px 6px -2px rgba(168, 85, 247, 0.05) !important;
+}
+.admin-theme-light .admin-card-purple:hover {
+  border-color: #9333ea !important;
+  box-shadow: 0 14px 30px -4px rgba(168, 85, 247, 0.25) !important;
+}
+
+/* Matching Rounded Colored Icon Badges */
+.admin-theme-light .admin-icon-emerald {
+  background-color: #ecfdf5 !important;
+  color: #059669 !important;
+  border: 1px solid #a7f3d0 !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15) !important;
+}
+.admin-theme-light .admin-icon-amber {
+  background-color: #fffbeb !important;
+  color: #d97706 !important;
+  border: 1px solid #fde68a !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15) !important;
+}
+.admin-theme-light .admin-icon-cyan {
+  background-color: #ecfeff !important;
+  color: #0891b2 !important;
+  border: 1px solid #a5f3fc !important;
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.15) !important;
+}
+.admin-theme-light .admin-icon-purple {
+  background-color: #faf5ff !important;
+  color: #9333ea !important;
+  border: 1px solid #e9d5ff !important;
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.15) !important;
+}
