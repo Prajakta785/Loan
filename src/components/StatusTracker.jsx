@@ -24,6 +24,7 @@ export default function StatusTracker() {
     closeTrackModal, 
     trackSearchQuery, 
     findApplication,
+    siteSettings,
     applications 
   } = useLoan();
 
@@ -293,11 +294,11 @@ export default function StatusTracker() {
                     {lang === 'mr' ? 'काही शंका असल्यास मदत कक्षाशी बोला:' : 'Need assistance with this application?'}
                   </span>
                   <a 
-                    href="tel:18002008899" 
+                    href={`tel:${(siteSettings?.helplinePhone || '8010061527').replace(/\D/g, '')}`} 
                     className="font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1"
                   >
                     <PhoneCall className="w-3.5 h-3.5" />
-                    <span>1800-200-8899</span>
+                    <span>{siteSettings?.helplinePhone || '+91 80100 61527'}</span>
                   </a>
                 </div>
 

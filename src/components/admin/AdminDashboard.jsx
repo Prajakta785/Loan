@@ -1977,7 +1977,7 @@ export default function AdminDashboard() {
                     {lang === 'mr' ? 'संपर्क माहिती व पत्ता (Contact & Branch Address)' : 'Contact Information & Branch Addresses'}
                   </h4>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                       <label className="block text-slate-400 mb-1 font-bold">
                         {lang === 'mr' ? 'टोल-फ्री हेल्पलाईन नंबर:' : 'Toll-Free Helpline Phone:'}
@@ -1998,6 +1998,20 @@ export default function AdminDashboard() {
                         type="text"
                         value={cmsForm.secondaryPhone || ''}
                         onChange={(e) => setCmsForm({ ...cmsForm, secondaryPhone: e.target.value })}
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-slate-400 mb-1 font-bold flex items-center gap-1.5">
+                        <span className="text-[#25D366]">💬</span>
+                        <span>{lang === 'mr' ? 'व्हॉट्सॲप नंबर (अर्जासाठी):' : 'WhatsApp Number (For Loans):'}</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={cmsForm.whatsappNumber || ''}
+                        onChange={(e) => setCmsForm({ ...cmsForm, whatsappNumber: e.target.value })}
+                        placeholder="919822012345"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white"
                       />
                     </div>

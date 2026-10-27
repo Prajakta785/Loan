@@ -43,8 +43,8 @@ export default function ContactSection() {
     ? (siteSettings?.officeTimingsMr || 'सोमवार ते शनिवार: स. 9:30 ते सायं 7:00')
     : (siteSettings?.officeTimingsEn || 'Monday to Saturday: 9:30 AM to 7:00 PM');
 
-  const phone = siteSettings?.helplinePhone || '1800-200-8899';
-  const phoneSec = siteSettings?.secondaryPhone || '+91 98220 12345';
+  const phone = siteSettings?.helplinePhone || '+91 80100 61527';
+  const phoneSec = siteSettings?.secondaryPhone || '+91 80100 61527';
   const email = siteSettings?.officialEmail || 'support@mahaloan.com';
 
   return (
@@ -95,14 +95,14 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <strong className="block text-white font-bold">
-                    {lang === 'mr' ? 'हेल्पलाईन नंबर:' : 'Helpline Numbers:'}
+                    {lang === 'mr' ? 'हेल्पलाईन व व्हॉट्सॲप नंबर:' : 'Helpline & WhatsApp Number:'}
                   </strong>
-                  <a href={`tel:${phone.replace(/\D/g, '')}`} className="text-emerald-400 font-extrabold block hover:text-emerald-300 transition-colors">
-                    {phone} ({lang === 'mr' ? 'टोल-फ्री' : 'Toll-Free'})
+                  <a href={`tel:${phone.replace(/\D/g, '')}`} className="text-emerald-400 font-extrabold text-base block hover:text-emerald-300 transition-colors">
+                    {phone}
                   </a>
-                  <a href={`tel:${phoneSec.replace(/\D/g, '')}`} className="text-slate-300 hover:text-teal-300 transition-colors block mt-0.5">
-                    {phoneSec}
-                  </a>
+                  <span className="text-[11px] text-slate-400 block mt-0.5">
+                    {lang === 'mr' ? '24/7 ग्राहक सेवा व थेट कर्ज चौकशी' : '24/7 Customer Support & Loan Inquiries'}
+                  </span>
                 </div>
               </div>
 

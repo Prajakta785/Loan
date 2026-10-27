@@ -37,7 +37,7 @@ export default function Navbar() {
     ? (siteSettings?.topAnnouncementMr || 'गृह कर्ज आणि वैयक्तिक कर्जावर शून्य प्रक्रिया शुल्क!')
     : (siteSettings?.topAnnouncementEn || 'Zero Processing Fees on Home and Personal Loans this month!');
 
-  const phone = siteSettings?.helplinePhone || '1800-200-8899';
+  const phone = siteSettings?.helplinePhone || '+91 80100 61527';
   const brandName = lang === 'mr' ? (siteSettings?.companyNameMr || 'महालोन') : (siteSettings?.companyNameEn || 'MahaLoan');
   const tagline = lang === 'mr' ? (siteSettings?.taglineMr || 'महाराष्ट्र कर्ज व वित्त सेवा') : (siteSettings?.taglineEn || 'Fast & Trusted Loan Solutions');
 

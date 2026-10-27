@@ -3,8 +3,10 @@ import { useLoan } from '../context/LoanContext';
 import { MessageCircle, ArrowUp } from 'lucide-react';
 
 export default function FloatingActions() {
-  const { lang, currentView } = useLoan();
+  const { lang, siteSettings } = useLoan();
   const [showTopBtn, setShowTopBtn] = useState(false);
+
+  const waNumber = siteSettings?.whatsappNumber || '918010061527';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,7 +36,7 @@ export default function FloatingActions() {
       
       {/* WhatsApp Button */}
       <a
-        href={`https://wa.me/919822012345?text=${whatsappMessage}`}
+        href={`https://wa.me/${waNumber}?text=${whatsappMessage}`}
         target="_blank"
         rel="noopener noreferrer"
         className="pointer-events-auto w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg shadow-emerald-500/30 hover:scale-110 active:scale-95 transition-all cursor-pointer group"

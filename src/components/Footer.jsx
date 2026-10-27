@@ -1,9 +1,10 @@
 import React from 'react';
 import { useLoan } from '../context/LoanContext';
-import { Building2, Heart } from 'lucide-react';
+import { Building2, Heart, PhoneCall, ShieldCheck } from 'lucide-react';
 
 export default function Footer() {
-  const { lang, openApplyModal } = useLoan();
+  const { lang, openApplyModal, siteSettings } = useLoan();
+  const phone = siteSettings?.helplinePhone || '+91 80100 61527';
 
   return (
     <footer className="bg-slate-950 text-slate-400 text-xs border-t border-slate-800">
@@ -31,6 +32,14 @@ export default function Footer() {
             <div className="flex items-center gap-2 text-slate-300 text-[11px]">
               <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
               <span>{lang === 'mr' ? 'आरबीआय नियमांनुसार 100% सुरक्षित वित्तीय सेवा' : '100% Compliant with RBI Consumer Lending Guidelines'}</span>
+            </div>
+
+            <div className="pt-1 text-xs text-slate-300 flex items-center gap-2">
+              <PhoneCall className="w-3.5 h-3.5 text-emerald-400" />
+              <span>{lang === 'mr' ? 'हेल्पलाईन नंबर:' : 'Helpline:'}</span>
+              <a href={`tel:${phone.replace(/\D/g, '')}`} className="text-emerald-400 font-extrabold hover:underline">
+                {phone}
+              </a>
             </div>
           </div>
 

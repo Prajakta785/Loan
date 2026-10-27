@@ -22,7 +22,14 @@ export const LoanProvider = ({ children }) => {
   const [siteSettings, setSiteSettings] = useState(() => {
     try {
       const saved = localStorage.getItem('mahaloan_settings');
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        return {
+          ...JSON.parse(saved),
+          helplinePhone: '+91 80100 61527',
+          secondaryPhone: '+91 80100 61527',
+          whatsappNumber: '918010061527'
+        };
+      }
     } catch (e) {
       console.error(e);
     }
