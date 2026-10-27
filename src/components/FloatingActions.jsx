@@ -3,7 +3,7 @@ import { useLoan } from '../context/LoanContext';
 import { MessageCircle, ArrowUp } from 'lucide-react';
 
 export default function FloatingActions() {
-  const { lang, siteSettings } = useLoan();
+  const { lang, siteSettings, currentView } = useLoan();
   const [showTopBtn, setShowTopBtn] = useState(false);
 
   const waNumber = siteSettings?.whatsappNumber || '918010061527';
