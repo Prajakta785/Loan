@@ -16,7 +16,8 @@ import {
   Printer,
   Sparkles,
   CheckCircle2,
-  MessageCircle
+  MessageCircle,
+  Laptop
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -130,15 +131,20 @@ export default function LoanApplicationModal() {
     setStep(prev => Math.max(1, prev - 1));
   };
 
-  const getWhatsAppUrl = (app) => {
-    if (!app) return '#';
+  const isLaptopDevice = () => {
+    if (typeof window === 'undefined' || typeof navigator === 'undefined') return false;
+    return !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  };
+
+  const getWhatsAppMessage = (app) => {
+    if (!app) return '';
     const isMr = lang === 'mr';
     const amountFormatted = Number(app.amount || 0).toLocaleString('en-IN');
     const emiFormatted = Number(app.monthlyEmi || 0).toLocaleString('en-IN');
     const incomeFormatted = Number(app.monthlyIncome || app.income || 0).toLocaleString('en-IN');
     const dateFormatted = new Date().toLocaleDateString(isMr ? 'mr-IN' : 'en-IN');
 
-    const msg = isMr
+    return isMr
       ? `*नवीन कर्ज अर्ज - महालोन फायनान्स (MahaLoan)*\n` +
         `━━━━━━━━━━━━━━━━━━━━\n` +
         `📌 *अर्ज क्रमांक (App ID):* ${app.id}\n` +
@@ -171,9 +177,46 @@ export default function LoanApplicationModal() {
         `📅 *Date:* ${dateFormatted}\n` +
         `━━━━━━━━━━━━━━━━━━━━\n` +
         `Kindly review my loan application and initiate the verification process. Thank you!`;
+  };
 
-    const targetPhone = (siteSettings?.whatsappNumber || '919822012345').replace(/\D/g, '');
-    return `https://wa.me/${targetPhone}?text=${encodeURIComponent(msg)}`;
+  const getWhatsAppWebUrl = (app) => {
+    if (!app) return '#';
+    const targetPhone = (siteSettings?.whatsappNumber || '918010061527').replace(/\D/g, '');
+    const msg = getWhatsAppMessage(app);
+    return `https://web.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(msg)}`;
+  };
+
+  const getWhatsAppAppUrl = (app) => {
+    if (!app) return '#';
+    const targetPhone = (siteSettings?.whatsappNumber || '918010061527').replace(/\D/g, '');
+    const msg = getWhatsAppMessage(app);
+    return `https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(msg)}`;
+  };
+
+  const getWhatsAppUrl = (app) => {
+    if (!app) return '#';
+    // On laptop/desktop, open WhatsApp Web directly for immediate in-browser messaging
+    if (isLaptopDevice()) {
+      return getWhatsAppWebUrl(app);
+    }
+    return getWhatsAppAppUrl(app);
+  };
+
+  const openWhatsAppDirectly = (url) => {
+    try {
+      const win = window.open(url, '_blank', 'noopener,noreferrer');
+      if (!win || win.closed || typeof win.closed === 'undefined') {
+        const a = document.createElement('a');
+        a.href = url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+    } catch (err) {
+      console.log('WhatsApp open err', err);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -181,13 +224,9 @@ export default function LoanApplicationModal() {
     const createdApp = submitApplication(formData);
     setSubmittedApp(createdApp);
     
-    // Automatically open application details directly in WhatsApp
-    try {
-      const waUrl = getWhatsAppUrl(createdApp);
-      window.open(waUrl, '_blank');
-    } catch (err) {
-      console.log('WhatsApp auto open error:', err);
-    }
+    // Automatically open application details in WhatsApp (WhatsApp Web on laptop, WhatsApp App on mobile)
+    const waUrl = getWhatsAppUrl(createdApp);
+    openWhatsAppDirectly(waUrl);
 
     // Trigger celebratory confetti
     try {
@@ -400,15 +439,27 @@ export default function LoanApplicationModal() {
               </div>
 
               {/* Actions */}
-              <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 justify-center pt-2">
                 <a
                   href={getWhatsAppUrl(submittedApp)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold text-sm shadow-lg shadow-emerald-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
+                  className="px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-black text-sm shadow-lg shadow-emerald-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <MessageCircle className="w-4 h-4 fill-white" />
                   <span>{lang === 'mr' ? 'व्हॉट्सॲपवर मेसेज पाठवा' : 'Send via WhatsApp'}</span>
+                </a>
+
+                {/* Direct WhatsApp Web Button (Optimal for Laptop) */}
+                <a
+                  href={getWhatsAppWebUrl(submittedApp)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-400 hover:text-white font-bold text-xs border border-emerald-500/30 transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
+                  title="Direct WhatsApp Web on Laptop"
+                >
+                  <Laptop className="w-4 h-4 text-emerald-400" />
+                  <span>{lang === 'mr' ? 'लॅपटॉप: WhatsApp Web' : 'Laptop: WhatsApp Web'}</span>
                 </a>
 
                 <button
@@ -416,18 +467,18 @@ export default function LoanApplicationModal() {
                     closeApplyModal();
                     openTrackModal(submittedApp.id);
                   }}
-                  className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <span>{lang === 'mr' ? 'थेट स्थिती ट्रॅक करा' : 'Track Application Status'}</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>{lang === 'mr' ? 'स्थिती ट्रॅक करा' : 'Track Status'}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
 
                 <button
                   onClick={handlePrint}
-                  className="px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm border border-slate-200 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs border border-slate-200 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <Printer className="w-4 h-4" />
-                  <span>{lang === 'mr' ? 'पावती प्रिंट करा' : 'Print Receipt'}</span>
+                  <Printer className="w-3.5 h-3.5" />
+                  <span>{lang === 'mr' ? 'पावती प्रिंट' : 'Print'}</span>
                 </button>
               </div>
             </div>

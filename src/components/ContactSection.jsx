@@ -24,10 +24,50 @@ export default function ContactSection() {
     e.preventDefault();
     if (!formData.name || !formData.phone) return;
     setSubmitted(true);
+    const isDesktop = typeof window !== 'undefined' && !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const targetPhone = (siteSettings?.whatsappNumber || '918010061527').replace(/\D/g, '');
+    
+    const waText = lang === 'mr'
+      ? `*नवीन कर्ज चौकशी - महालोन फायनान्स (MahaLoan)*\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `👤 *नाव:* ${formData.name}\n` +
+        `📱 *मोबाईल:* ${formData.phone}\n` +
+        `💰 *कर्ज योजना:* ${formData.loanType}\n` +
+        `💬 *संदेश:* ${formData.message || 'मला कर्ज अर्जाबाबत माहिती हवी आहे.'}\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `कृपया लवकरात लवकर संपर्क साधावा.`
+      : `*New Loan Inquiry - MahaLoan Finance*\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `👤 *Name:* ${formData.name}\n` +
+        `📱 *Mobile:* ${formData.phone}\n` +
+        `💰 *Loan Scheme:* ${formData.loanType}\n` +
+        `💬 *Message:* ${formData.message || 'I would like to inquire about loan options.'}\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `Kindly contact me at the earliest.`;
+
+    const waUrl = isDesktop
+      ? `https://web.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(waText)}`
+      : `https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(waText)}`;
+
+    try {
+      const win = window.open(waUrl, '_blank', 'noopener,noreferrer');
+      if (!win || win.closed || typeof win.closed === 'undefined') {
+        const a = document.createElement('a');
+        a.href = waUrl;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+    } catch (err) {
+      console.log('WhatsApp open err', err);
+    }
+
     showToast(
       lang === 'mr' 
-        ? 'धन्यवाद! आमचे प्रतिनिधी लवकरच आपल्याशी संपर्क साधतील.' 
-        : 'Thank you! Our loan representative will reach out shortly.'
+        ? 'धन्यवाद! तुमचा संदेश व्हॉट्सॲपवर पाठवला जात आहे.' 
+        : 'Thank you! Your inquiry is being sent via WhatsApp.'
     );
     setTimeout(() => {
       setSubmitted(false);
