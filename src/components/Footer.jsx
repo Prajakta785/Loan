@@ -1,9 +1,9 @@
 import React from 'react';
 import { useLoan } from '../context/LoanContext';
-import { Building2, ShieldCheck, Heart } from 'lucide-react';
+import { Building2, Heart } from 'lucide-react';
 
 export default function Footer() {
-  const { lang, setCurrentView, openApplyModal } = useLoan();
+  const { lang, openApplyModal } = useLoan();
 
   return (
     <footer className="bg-slate-950 text-slate-400 text-xs border-t border-slate-800">
@@ -70,27 +70,16 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col: Admin & Portals */}
+          {/* Col: Policies & Legal */}
           <div>
             <h4 className="text-sm font-bold text-white mb-4">
-              {lang === 'mr' ? 'पोर्टल आणि सुरक्षा' : 'Portal Access'}
+              {lang === 'mr' ? 'धोरणे आणि अटी' : 'Policies & Terms'}
             </h4>
             <ul className="space-y-2">
-              <li>
-                <button
-                  onClick={() => {
-                    setCurrentView('admin');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className="text-amber-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
-                >
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>{lang === 'mr' ? 'ॲडमिन पॅनल लॉगिन' : 'Admin Panel Login'}</span>
-                </button>
-              </li>
               <li><a href="#faqs" className="hover:text-emerald-400 transition-colors">{lang === 'mr' ? 'गोपनीयता धोरण (Privacy)' : 'Privacy Policy'}</a></li>
               <li><a href="#faqs" className="hover:text-emerald-400 transition-colors">{lang === 'mr' ? 'अटी व शर्ती (Terms)' : 'Terms & Conditions'}</a></li>
               <li><a href="#faqs" className="hover:text-emerald-400 transition-colors">{lang === 'mr' ? 'व्याजदर धोरण' : 'Interest Policy'}</a></li>
+              <li><a href="#faqs" className="hover:text-emerald-400 transition-colors">{lang === 'mr' ? 'आरबीआय मार्गदर्शक तत्त्वे' : 'RBI Guidelines'}</a></li>
             </ul>
           </div>
 

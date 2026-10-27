@@ -14,19 +14,14 @@ import Footer from './components/Footer';
 import LoanApplicationModal from './components/LoanApplicationModal';
 import StatusTracker from './components/StatusTracker';
 import FloatingActions from './components/FloatingActions';
-import AdminDashboard from './components/admin/AdminDashboard';
-import AdminLogin from './components/admin/AdminLogin';
-import { CheckCircle2, AlertCircle } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
 function MainContent() {
-  const { currentView, isAdminAuthenticated, toast } = useLoan();
+  const { toast } = useLoan();
 
   return (
     <div 
-      className={currentView === 'admin' && isAdminAuthenticated 
-        ? "h-screen w-full overflow-hidden flex flex-col font-sans selection:bg-emerald-500 selection:text-white" 
-        : "min-h-screen bg-slate-950 text-slate-800 flex flex-col font-sans selection:bg-emerald-500 selection:text-white"
-      }
+      className="min-h-screen bg-slate-950 text-slate-800 flex flex-col font-sans selection:bg-emerald-500 selection:text-white"
       style={{
         backgroundImage: `url('/bg-cyber.png')`,
         backgroundAttachment: 'fixed',
@@ -46,33 +41,25 @@ function MainContent() {
         </div>
       )}
 
-      {/* Main View Router */}
-      {currentView === 'customer' ? (
-        <>
-          <Navbar />
-          <main className="flex-1">
-            <Hero />
-            <LoanProducts />
-            <EmiCalculator />
-            <EligibilityChecker />
-            <HowItWorks />
-            <WhyUs />
-            <Testimonials />
-            <FaqSection />
-            <ContactSection />
-          </main>
-          <Footer />
-        </>
-      ) : !isAdminAuthenticated ? (
-        <AdminLogin />
-      ) : (
-        <AdminDashboard />
-      )}
+      {/* Main Website View */}
+      <Navbar />
+      <main className="flex-1">
+        <Hero />
+        <LoanProducts />
+        <EmiCalculator />
+        <EligibilityChecker />
+        <HowItWorks />
+        <WhyUs />
+        <Testimonials />
+        <FaqSection />
+        <ContactSection />
+      </main>
+      <Footer />
 
       {/* Persistent Interactive Modals */}
       <LoanApplicationModal />
       <StatusTracker />
-      {currentView === 'customer' && <FloatingActions />}
+      <FloatingActions />
     </div>
   );
 }
