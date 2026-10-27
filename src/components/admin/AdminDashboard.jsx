@@ -235,13 +235,13 @@ export default function AdminDashboard() {
   const filteredApps = applications.filter(a => {
     const matchesStatus = statusFilter === 'All' ? true : a.status === statusFilter;
     const matchesType = loanTypeFilter === 'All' ? true : a.loanType === loanTypeFilter;
-    const q = searchQuery.toLowerCase().trim();
+    const q = (searchQuery || '').toLowerCase().trim();
     const matchesSearch = !q || 
-      a.id.toLowerCase().includes(q) ||
-      a.name.toLowerCase().includes(q) ||
-      a.mobile.includes(q) ||
-      a.city.toLowerCase().includes(q) ||
-      a.pan.toLowerCase().includes(q);
+      (a.id && a.id.toLowerCase().includes(q)) ||
+      (a.name && a.name.toLowerCase().includes(q)) ||
+      (a.mobile && a.mobile.includes(q)) ||
+      (a.city && a.city.toLowerCase().includes(q)) ||
+      (a.pan && a.pan.toLowerCase().includes(q));
 
     return matchesStatus && matchesType && matchesSearch;
   });
@@ -327,6 +327,29 @@ export default function AdminDashboard() {
     }
     const created = addApplicationByAdmin(adminLoanForm);
     setAdminFormSuccess(created);
+    // Reset form fields
+    setAdminLoanForm({
+      name: '',
+      mobile: '',
+      email: '',
+      city: 'पुणे',
+      state: 'Maharashtra',
+      pan: '',
+      aadhaar: '',
+      employment: 'Salaried',
+      company: '',
+      income: 50000,
+      loanType: 'personal',
+      amount: 500000,
+      tenure: 36,
+      purpose: '',
+      status: 'Pending',
+      approvedAmount: 500000,
+      approvedRate: 10.5,
+      remarks: ''
+    });
+    // Automatically switch to applications tab so newly added data is instantly visible
+    setActiveTab('applications');
     try {
       confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
     } catch (err) {}

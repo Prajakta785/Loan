@@ -234,28 +234,41 @@ export const LoanProvider = ({ children }) => {
     showToast(lang === 'mr' ? 'अभिप्राय हटवला गेला!' : 'Review deleted!');
   };
 
-  // 5. Applications list in state + localStorage persistence (Dummy data purged)
-  const mockDummyIds = ['ML-2026-8012', 'ML-2026-8025', 'ML-2026-8038', 'ML-2026-8049', 'ML-2026-8054', 'ML-2026-8061'];
+  // 5. Applications list in state + localStorage persistence
   const [applications, setApplications] = useState(() => {
     try {
       const saved = localStorage.getItem('mahaloan_applications');
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          // Purge all legacy dummy mock applications
-          const realOnly = parsed.filter(a => !mockDummyIds.includes(a.id));
-          return realOnly;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
         }
       }
     } catch (e) {
       console.error('Failed to load applications from localStorage', e);
     }
-    return [];
+    return initialApplications;
   });
 
   useEffect(() => {
     localStorage.setItem('mahaloan_applications', JSON.stringify(applications));
   }, [applications]);
+
+  // Real-time multi-tab & cross-window sync
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'mahaloan_applications' && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          if (Array.isArray(parsed)) {
+            setApplications(parsed);
+          }
+        } catch (err) {}
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('mahaloan_lang', lang);
@@ -320,7 +333,7 @@ export const LoanProvider = ({ children }) => {
       city: formData.city,
       state: formData.state || 'Maharashtra',
       aadhaar: formData.aadhaar,
-      pan: formData.pan.toUpperCase(),
+      pan: (formData.pan || 'ABCDE1234F').toUpperCase(),
       employment: formData.employment,
       company: formData.company || 'स्वयंरोजगार / Self-employed',
       income: Number(formData.income),
