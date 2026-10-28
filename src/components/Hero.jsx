@@ -156,116 +156,111 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Interactive Quick Loan Estimate Card - Light Blue Theme */}
+          {/* Right Column: Interactive Quick Loan Estimate Card - Matching Image 1 & Image 2 Theme */}
           <div className="lg:col-span-5">
-            <div className="relative">
-              {/* Vibrant Light Blue & Cyan Ambient Glow */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-500 rounded-3xl blur-xl opacity-40 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+            <div className="relative rounded-3xl bg-slate-900 border border-slate-800 p-5 sm:p-6 lg:p-7 shadow-2xl shadow-slate-950/50 space-y-4">
               
-              <div className="relative rounded-2xl sm:rounded-3xl bg-gradient-to-b from-slate-900/95 via-sky-950/80 to-slate-900/95 border border-sky-400/40 p-4 sm:p-5 lg:p-6 backdrop-blur-xl shadow-2xl shadow-sky-500/15 space-y-3 sm:space-y-3.5">
-                
-                {/* Card Header */}
-                <div className="flex items-center justify-between pb-2.5 border-b border-sky-900/60">
-                  <div>
-                    <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-1.5">
-                      <span>{lang === 'mr' ? 'झटपट EMI अंदाज' : 'Quick Loan Estimator'}</span>
-                    </h2>
-                    <p className="text-[11px] text-sky-200/80">
-                      {lang === 'mr' ? 'तुमचा हप्ता तपासा आणि थेट अर्ज करा' : 'Preview installment & apply directly'}
-                    </p>
-                  </div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 text-xs font-bold border border-sky-400/30 shadow-xs">
-                    @ {heroRate}% p.a.
+              {/* Card Header */}
+              <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+                <div>
+                  <h2 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                    {lang === 'mr' ? 'झटपट EMI अंदाज' : 'Quick Loan Estimator'}
+                  </h2>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    {lang === 'mr' ? 'तुमचा हप्ता तपासा आणि थेट अर्ज करा' : 'Preview installment & apply directly'}
+                  </p>
+                </div>
+                <span className="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-400 text-xs font-bold border border-emerald-500/30">
+                  @ {heroRate}% p.a.
+                </span>
+              </div>
+
+              {/* Amount Slider */}
+              <div className="space-y-1.5">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="text-slate-300 font-semibold">
+                    {lang === 'mr' ? 'कर्ज रक्कम (Amount)' : 'Loan Amount'}
+                  </span>
+                  <span className="text-lg sm:text-xl font-black text-emerald-400 tracking-tight">
+                    {formatCurrency(heroAmount)}
                   </span>
                 </div>
-
-                {/* Amount Slider */}
-                <div className="space-y-1">
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="text-sky-100 font-semibold">
-                      {lang === 'mr' ? 'कर्ज रक्कम (Amount)' : 'Loan Amount'}
-                    </span>
-                    <span className="text-base font-black text-sky-300 drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">
-                      {formatCurrency(heroAmount)}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="50000"
-                    max="5000000"
-                    step="50000"
-                    value={heroAmount}
-                    onChange={(e) => setHeroAmount(Number(e.target.value))}
-                    className="w-full h-1.5 bg-slate-800 border border-sky-950 rounded-lg appearance-none cursor-pointer accent-sky-400"
-                  />
-                  <div className="flex justify-between text-[10px] text-sky-400/70 font-medium">
-                    <span>₹50,000</span>
-                    <span>₹25,00,000</span>
-                    <span>₹50,00,000</span>
-                  </div>
+                <input
+                  type="range"
+                  min="50000"
+                  max="5000000"
+                  step="50000"
+                  value={heroAmount}
+                  onChange={(e) => setHeroAmount(Number(e.target.value))}
+                  className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-400"
+                />
+                <div className="flex justify-between text-[11px] text-slate-500 font-medium">
+                  <span>₹50,000</span>
+                  <span>₹25,00,000</span>
+                  <span>₹50,00,000</span>
                 </div>
+              </div>
 
-                {/* Tenure Slider */}
-                <div className="space-y-1">
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="text-sky-100 font-semibold">
-                      {lang === 'mr' ? 'कालावधी (Tenure)' : 'Tenure'}
-                    </span>
-                    <span className="text-xs font-bold text-sky-200 bg-sky-950/90 px-2 py-0.5 rounded-md border border-sky-400/40 shadow-xs">
-                      {heroTenure} {lang === 'mr' ? 'महिने' : 'Months'}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="12"
-                    max="84"
-                    step="6"
-                    value={heroTenure}
-                    onChange={(e) => setHeroTenure(Number(e.target.value))}
-                    className="w-full h-1.5 bg-slate-800 border border-sky-950 rounded-lg appearance-none cursor-pointer accent-sky-400"
-                  />
-                  <div className="flex justify-between text-[10px] text-sky-400/70 font-medium">
-                    <span>1 {lang === 'mr' ? 'वर्ष' : 'Yr'}</span>
-                    <span>3 {lang === 'mr' ? 'वर्षे' : 'Yrs'}</span>
-                    <span>7 {lang === 'mr' ? 'वर्षे' : 'Yrs'}</span>
-                  </div>
-                </div>
-
-                {/* Calculated Result Box - Luminous Light Blue / Azure Theme */}
-                <div className="bg-gradient-to-br from-sky-950/90 via-blue-900/60 to-cyan-950/80 p-3 sm:p-3.5 rounded-2xl border-2 border-sky-400/50 shadow-inner text-center space-y-0.5">
-                  <div className="text-[10px] sm:text-[11px] text-sky-200 uppercase tracking-wider font-bold">
-                    {lang === 'mr' ? 'अपेक्षित मासिक हप्ता (MONTHLY EMI)' : 'ESTIMATED MONTHLY EMI'}
-                  </div>
-                  <div className="text-2xl sm:text-3xl font-black text-sky-300 drop-shadow-[0_2px_12px_rgba(56,189,248,0.5)]">
-                    {formatCurrency(estimatedEmi)}
-                    <span className="text-xs text-sky-200/80 font-normal ml-1">/ {lang === 'mr' ? 'महिना' : 'month'}</span>
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] text-sky-200/80 pt-0.5">
-                    {lang === 'mr' ? 'एकूण परतफेड:' : 'Total Repayment:'}{' '}
-                    <strong className="text-white font-black">{formatCurrency(estimatedEmi * heroTenure)}</strong>
-                  </div>
-                </div>
-
-                {/* Direct Action Button - Light Blue to Cyan Gradient */}
-                <button
-                  onClick={() => openApplyModal('personal')}
-                  className="w-full py-2.5 sm:py-3 px-4 bg-gradient-to-r from-sky-400 via-cyan-400 to-teal-300 hover:from-sky-300 hover:to-cyan-300 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-lg shadow-sky-500/30 transition-all text-center flex items-center justify-center gap-1.5 group cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
-                >
-                  <span>{lang === 'mr' ? 'हा हप्ता निवडून अर्ज करा' : 'Apply with this EMI'}</span>
-                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-
-                {/* Trust Footer Badges */}
-                <div className="flex items-center justify-center gap-4 text-[10px] text-sky-300 pt-0.5 font-medium">
-                  <span className="flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3 text-sky-400" />
-                    {lang === 'mr' ? 'शून्य छुपे खर्च' : 'Zero Hidden Fees'}
+              {/* Tenure Slider */}
+              <div className="space-y-1.5">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="text-slate-300 font-semibold">
+                    {lang === 'mr' ? 'कालावधी (Tenure)' : 'Tenure'}
                   </span>
-                  <span className="flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3 text-sky-400" />
-                    {lang === 'mr' ? 'सुरक्षित प्रक्रिया' : '100% Encrypted'}
+                  <span className="text-xs font-bold text-white bg-slate-800 px-3 py-1 rounded-lg border border-slate-700">
+                    {heroTenure} {lang === 'mr' ? 'महिने' : 'Months'}
                   </span>
                 </div>
+                <input
+                  type="range"
+                  min="12"
+                  max="84"
+                  step="6"
+                  value={heroTenure}
+                  onChange={(e) => setHeroTenure(Number(e.target.value))}
+                  className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-400"
+                />
+                <div className="flex justify-between text-[11px] text-slate-500 font-medium">
+                  <span>1 {lang === 'mr' ? 'वर्ष' : 'Yr'}</span>
+                  <span>3 {lang === 'mr' ? 'वर्षे' : 'Yrs'}</span>
+                  <span>7 {lang === 'mr' ? 'वर्षे' : 'Yrs'}</span>
+                </div>
+              </div>
+
+              {/* Calculated Result Box - Matching Inner Box of Image 2 */}
+              <div className="bg-[#0b1329] p-4 sm:p-5 rounded-2xl border border-slate-800 text-center space-y-1 shadow-inner">
+                <div className="text-xs text-slate-400 font-semibold tracking-wide">
+                  {lang === 'mr' ? 'अपेक्षित मासिक हप्ता (MONTHLY EMI)' : 'ESTIMATED MONTHLY EMI'}
+                </div>
+                <div className="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-tight">
+                  {formatCurrency(estimatedEmi)}
+                  <span className="text-xs text-slate-400 font-normal ml-1">/ {lang === 'mr' ? 'महिना' : 'month'}</span>
+                </div>
+                <div className="text-xs text-slate-400 pt-1">
+                  {lang === 'mr' ? 'एकूण परतफेड:' : 'Total Repayment:'}{' '}
+                  <strong className="text-slate-200 font-bold">{formatCurrency(estimatedEmi * heroTenure)}</strong>
+                </div>
+              </div>
+
+              {/* Direct Action Button - Matching Image 1 & Image 2 Mint/Teal Button */}
+              <button
+                onClick={() => openApplyModal('personal')}
+                className="w-full py-3.5 px-6 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:brightness-105 text-slate-950 font-extrabold text-sm rounded-xl shadow-lg shadow-emerald-500/25 transition-all text-center flex items-center justify-center gap-2 group cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
+              >
+                <span>{lang === 'mr' ? 'हा हप्ता निवडून अर्ज करा' : 'Apply with this EMI'}</span>
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+
+              {/* Trust Footer Badges */}
+              <div className="flex items-center justify-center gap-6 text-xs text-slate-400 pt-1">
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  {lang === 'mr' ? 'शून्य छुपे खर्च' : 'Zero Hidden Fees'}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  {lang === 'mr' ? 'सुरक्षित प्रक्रिया' : '100% Encrypted'}
+                </span>
               </div>
             </div>
           </div>
